@@ -6,8 +6,8 @@ export const usersTable = pgTable("users", {
   name: varchar({ length: 256 }).notNull().unique(),
   password: text().notNull(),
   fname: varchar({ length: 256 }).notNull(),
-  mname: varchar({ length: 256 }).notNull(),
-  lname: varchar({ length: 256 }).notNull(),
-  joinedOn: date().notNull(),
+  mname: varchar({ length: 256 }),
+  lname: varchar({ length: 256 }),
+  joinedOn: date().defaultNow().notNull(),
   salt: text().notNull(),
 });

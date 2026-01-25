@@ -4,7 +4,7 @@ import express from "express";
 const router = express.Router();
 
 // controllers
-import { showFeedForUser } from "../controllers/feed.controler.js";
+import { showFeedForUser } from "../controllers/feed.controller.js";    
 
 // all feed related routers
 router.get("/", showFeedForUser);

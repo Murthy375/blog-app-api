@@ -3,8 +3,10 @@ import express from "express";
 // router related
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  return res.status(200).json({ message: "all blogs on the platform go here" });
-});
+// controllers
+import { showFeedForUser } from "../controllers/feed.controler.js";
+
+// all feed related routers
+router.get("/", showFeedForUser);
 
 export default router;

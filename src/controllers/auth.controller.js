@@ -1,6 +1,6 @@
 // db related
 import db from "../db/index.js";
-import { usersTable } from "../db/schema.js";
+import { usersTable } from "../models/user.model.js";
 import { eq } from "drizzle-orm";
 
 // crypto related(for passward)

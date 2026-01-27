@@ -123,5 +123,5 @@ export const loginUser = async function (req, res) {
 
   return res
     .status(200)
-    .json({ status: "success", message: `log-in successful`, token: token });
+    .json({ message: `log-in successful`, token: token });
 };

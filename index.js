@@ -7,6 +7,7 @@ const PORT = process.env.PORT ?? 8000;
 import feedRouter from "./src/routes/feed.routes.js";
 import authRouter from "./src/routes/auth.routes.js";
 import blogRouter from "./src/routes/blog.routes.js";
+import userRouter from './src/routes/user.routes.js';
 
 // middleware related
 import { authUser } from "./src/middlewares/auth.middleware.js";
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 app.use("/feed", feedRouter);
 app.use("/auth", authRouter);
 app.use("/blog", blogRouter);
+app.use("/user", userRouter)
 
 app.listen(PORT, () => {
   console.log(`\nserver successfully listening @ http://localhost:${PORT}`);

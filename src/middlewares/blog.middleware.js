@@ -28,7 +28,7 @@ export const checkBlogBelongsToUser = async function (req, res, next) {
       // check if the blog blelongs to user
       return res
         .status(401)
-        .json({ error: `forbidden: can't access this blog/resource` });
+        .json({ error: `forbidden: can't access this blog` });
     }
 
     req.blog = blog;

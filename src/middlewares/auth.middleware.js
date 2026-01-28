@@ -34,7 +34,7 @@ export const authUser = function (req, res, next) {
   }
 };
 
-export const ensureUserIsAuth = function (req, res, next) {
+export const ensureUserIsAuth = async function (req, res, next) {
   // checks if user is authenticated or not //
 
   if (!req.user) {

@@ -4,14 +4,17 @@ import express from "express";
 const router = express.Router();
 
 // controllers
-import { createBlogPost } from "../controllers/blog.controller.js";
+import {
+  createBlogPost,
+  deleteBlogPost,
+} from "../controllers/blog.controller.js";
 
-// auth related
-import { ensureUserIsAuth } from "../middlewares/auth.middleware.js";
-
-router.use(ensureUserIsAuth); // make sure the user is authenticated
+// blog related middleware
+import { checkBlogBelongsToUser } from "../middlewares/blog.middleware.js";
+router.use(checkBlogBelongsToUser); // checks if blog belongs to user
 
 // all blog related routes
 router.post("/", createBlogPost);
+router.delete("/", deleteBlogPost);
 
 export default router;

@@ -24,3 +24,15 @@ export const createBlogPost = async function (req, res) {
 
   return res.status(201).json({ message: `blog post created` });
 };
+
+export const deleteBlogPost = async function (req, res) {
+  // deletes a specific blog post //
+
+  const [deletedBlog] = await db
+    .delete(blogsTable)
+    .where(eq(blogsTable.id, req.blog.id)).returning({
+      title: blogsTable.title,
+    })
+
+  return res.status(200).json({ message: `blog "${deletedBlog.title}" deleted` });
+};

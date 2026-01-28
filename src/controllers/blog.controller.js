@@ -34,5 +34,5 @@ export const deleteBlogPost = async function (req, res) {
       title: blogsTable.title,
     })
 
-  return res.status(200).json({ message: `blog "${deletedBlog.title}" deleted` });
+  return res.status(200).json({ message: `blog deleted` });
 };

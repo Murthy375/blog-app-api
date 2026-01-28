@@ -96,7 +96,7 @@ export const loginUser = async function (req, res) {
 
   if (!existingUser) {
     return res.status(409).json({
-      error: `user with email ${existingUser.email} does not exist, register before logging-in`,
+      error: `user with email ${email} does not exist, register before logging-in`,
       redirect: "/user/login",
     });
   }

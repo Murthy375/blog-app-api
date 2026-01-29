@@ -15,12 +15,21 @@ export const createBlogPost = async function (req, res) {
   }
 
   // insert the new blog in db
-  await db.insert(blogsTable).values({
-    userId: req.user.id,
-    title: title,
-    content: content,
-    tags: tags,
-  });
+  const [blogInfo] = await db
+    .insert(blogsTable)
+    .values({
+      userId: req.user.id,
+      title: title,
+      content: content,
+      tags: tags,
+    })
+    .returning({
+      id: blogsTable.id,
+    });
+
+  if (!blogInfo) {
+    return res.status(500).json({ error: "internal server error" });
+  }
 
   return res.status(201).json({ message: `blog post created` });
 };
@@ -30,9 +39,10 @@ export const deleteBlogPost = async function (req, res) {
 
   const [deletedBlog] = await db
     .delete(blogsTable)
-    .where(eq(blogsTable.id, req.blog.id)).returning({
+    .where(eq(blogsTable.id, req.blog.id))
+    .returning({
       title: blogsTable.title,
-    })
+    });
 
   return res.status(200).json({ message: `blog deleted` });
 };

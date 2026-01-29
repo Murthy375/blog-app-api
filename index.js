@@ -27,5 +27,5 @@ app.use("/blog", blogRouter);
 app.use("/user", userRouter)
 
 app.listen(PORT, () => {
-  console.log(`\nserver successfully listening @ http://localhost:${PORT}`);
+  console.log(`\nserver successfully listening @ http://localhost:${PORT}\n`);
 });

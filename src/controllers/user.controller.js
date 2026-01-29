@@ -21,7 +21,24 @@ export const showUserProfile = async function (req, res) {
     return res.status(404).json({ error: `user details not found` });
   }
 
-  console.log(userInfo);
-
   return res.status(200).json({ data: userInfo });
+};
+
+export const deleteUserAccount = async function (req, res) {
+  // account deletion with authorization //
+
+  const [deletedUser] = await db
+    .delete(usersTable)
+    .where(eq(usersTable.id, req.user.id))
+    .returning({
+      name: usersTable.name,
+    });
+
+  if (!deletedUser) {
+    return res.status(404).json({ error: "user not found" });
+  }
+
+  return res
+    .status(200)
+    .json({ message: `account deleted successfully`, data: deletedUser.name });
 };

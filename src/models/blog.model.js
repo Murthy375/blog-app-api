@@ -5,7 +5,7 @@ import { usersTable } from "./user.model.js";
 export const blogsTable = pgTable("blogs", {
   id: uuid().primaryKey().defaultRandom(),
   userId: uuid()
-    .references(() => usersTable.id)
+    .references(() => usersTable.id, { onDelete: "cascade" })
     .notNull(),
   createdAt: timestamp({ withTimezone: true, precision: 6 }).defaultNow(),
   title: varchar({ length: 256 }).notNull(),

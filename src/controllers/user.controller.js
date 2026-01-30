@@ -42,3 +42,36 @@ export const deleteUserAccount = async function (req, res) {
     .status(200)
     .json({ message: `account deleted successfully`, data: deletedUser.name });
 };
+
+export const editUserProfile = async function (req, res) {
+  // edit user info //
+
+  const { email, fname, mname, lname } = req.body;
+
+  if (!email || !fname || !mname || !lname) {
+    return res.status(409).json({ error: "invalid details" });
+  }
+
+  const [userInfo] = await db
+    .update(usersTable)
+    .set({
+      email: email,
+      fname: fname,
+      mname: mname,
+      lname: lname,
+    })
+    .where(eq(usersTable.id, req.user.id))
+    .returning({
+      id: usersTable.id,
+      email: usersTable.email,
+      name: usersTable.name,
+      fname: usersTable.fname,
+      mname: usersTable.mname,
+      lname: usersTable.lname,
+      joinedOn: usersTable.joinedOn,
+    });
+
+  console.log(userInfo);
+
+  return res.status(200).json({ data: userInfo });
+};

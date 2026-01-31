@@ -71,7 +71,5 @@ export const editUserProfile = async function (req, res) {
       joinedOn: usersTable.joinedOn,
     });
 
-  console.log(userInfo);
-
   return res.status(200).json({ data: userInfo });
 };

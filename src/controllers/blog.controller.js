@@ -46,3 +46,29 @@ export const deleteBlogPost = async function (req, res) {
 
   return res.status(200).json({ message: `blog deleted` });
 };
+
+export const editBlogPost = async function (req, res) {
+  // author can edit blog //
+
+  const { title, content, tags, } = req.body;
+
+  if (!title || !content) {
+    return res.status(409).json({ error: "invalid data" });
+  }
+
+  const [blogPost] = await db
+    .update(blogsTable)
+    .set({
+      title: title,
+      content: content,
+      tags: tags,
+    })
+    .where(eq(blogsTable.id, req.blog.id))
+    .returning({
+      title: blogsTable.title,
+      content: blogsTable.content,
+      tags: blogsTable.tags,
+    });
+
+  return res.status(200).json({ data: blogPost });
+};

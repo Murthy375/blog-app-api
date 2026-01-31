@@ -7,6 +7,7 @@ const router = express.Router();
 import {
   createBlogPost,
   deleteBlogPost,
+  editBlogPost
 } from "../controllers/blog.controller.js";
 
 // blog related middleware
@@ -16,5 +17,6 @@ router.use(checkBlogBelongsToUser); // checks if blog belongs to user
 // all blog related routes
 router.post("/", createBlogPost);
 router.delete("/", deleteBlogPost);
+router.patch("/edit", editBlogPost);
 
 export default router;

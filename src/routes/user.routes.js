@@ -7,12 +7,14 @@ const router = express.Router();
 import {
   showUserProfile,
   deleteUserAccount,
-  editUserProfile
+  editUserProfile,
+  showUserDashboard,
 } from "../controllers/user.controller.js";
 
 // all user related routes
 router.get("/profile", showUserProfile);
 router.delete("/account", deleteUserAccount);
 router.patch("/edit", editUserProfile);
+router.get("/dashboard", showUserDashboard);
 
 export default router;

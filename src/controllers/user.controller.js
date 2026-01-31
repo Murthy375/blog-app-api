@@ -1,5 +1,6 @@
 // db related
 import db from "../db/index.js";
+import { blogsTable } from "../models/blog.model.js";
 import { usersTable } from "../models/user.model.js";
 import { eq } from "drizzle-orm";
 
@@ -72,4 +73,13 @@ export const editUserProfile = async function (req, res) {
     });
 
   return res.status(200).json({ data: userInfo });
+};
+
+export const showUserDashboard = async function (req, res) {
+  const allUserBlogs = await db
+    .select()
+    .from(blogsTable)
+    .where(eq(blogsTable.userId, req.user.id));
+
+  return res.status(200).json({ data: allUserBlogs });
 };

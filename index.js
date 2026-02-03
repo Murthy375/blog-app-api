@@ -7,24 +7,26 @@ const PORT = process.env.PORT ?? 8000;
 import feedRouter from "./src/routes/feed.routes.js";
 import authRouter from "./src/routes/auth.routes.js";
 import blogRouter from "./src/routes/blog.routes.js";
-import userRouter from './src/routes/user.routes.js';
+import userRouter from "./src/routes/user.routes.js";
 
 // middleware related
 import { authUser } from "./src/middlewares/auth.middleware.js";
 
 app.use(express.json()); // parses json request bodies -> js objects
-app.use(authUser); // auth middleware
 
 // default route
-app.get("/", (req, res) => {
-  return res.redirect("/feed");
+app.get("/api/", (req, res) => {
+  return res.redirect("/api/feed");
 });
 
 // routes
-app.use("/feed", feedRouter);
+// public
+app.use("/api/feed", feedRouter);
 app.use("/auth", authRouter);
-app.use("/blog", blogRouter);
-app.use("/user", userRouter)
+
+// protected
+app.use("/blog", authUser, blogRouter);
+app.use("/user", authUser, userRouter);
 
 app.listen(PORT, () => {
   console.log(`\nserver successfully listening @ http://localhost:${PORT}\n`);

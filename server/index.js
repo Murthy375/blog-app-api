@@ -22,7 +22,7 @@ app.get("/api/", (req, res) => {
 // routes
 // public
 app.use("/api/feed", feedRouter);
-app.use("/auth", authRouter);
+app.use("api/auth", authRouter);
 
 // protected
 app.use("/blog", authUser, blogRouter);
